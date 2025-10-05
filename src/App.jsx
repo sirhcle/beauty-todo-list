@@ -1,15 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css'
 import TodoList from './components/TodoList';
 import AddTodoForm from './components/AddTodoForm';
 
 function App() {
 
-  const [todos, setTodos] = useState([
-    { id: 1, texto: 'Aprender sobre componentes', completada: true },
-    { id: 2, texto: 'Crear la estructura estática', completada: false },
-    { id: 3, texto: 'Añadir estado y funcionalidad', completada: false },
-  ]);
+  const estadoInicial = JSON.parse(localStorage.getItem('todos')) || [];
+  const [todos, setTodos] = useState(estadoInicial);
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
 
   const addTodo = (texto) => {
     const nuevaTarea = {
