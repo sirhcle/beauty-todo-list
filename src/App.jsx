@@ -1,35 +1,47 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState } from 'react';
 import './App.css'
+import TodoList from './components/TodoList';
+import AddTodoForm from './components/AddTodoForm';
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [todos, setTodos] = useState([
+    { id: 1, texto: 'Aprender sobre componentes', completada: true },
+    { id: 2, texto: 'Crear la estructura estática', completada: false },
+    { id: 3, texto: 'Añadir estado y funcionalidad', completada: false },
+  ]);
+
+  const addTodo = (texto) => {
+    const nuevaTarea = {
+      id: Date.now(),
+      texto: texto,
+      completada: false,
+    };
+    setTodos([...todos, nuevaTarea]);
+  };
+
+  const toggleTodo = (id) => {
+    setTodos(todos.map(todo =>
+      todo.id === id ? { ...todo, completada: !todo.completada } : todo
+    ));
+  };
+
+  const deleteTodo = (id) => {
+    // Crea un nuevo array excluyendo la tarea con el id a eliminar
+    setTodos(todos.filter(todo => todo.id !== id));
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="app">
+      <h1>Mi Lista de Tareas</h1>
+      <AddTodoForm onAddTodo={addTodo} />
+      <TodoList
+        todos={todos}
+        onToggleTodo={toggleTodo}
+        onDeleteTodo={deleteTodo}
+      />
+    </div>
+  );
 }
 
 export default App
