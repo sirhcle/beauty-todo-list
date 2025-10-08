@@ -1,17 +1,32 @@
-/* Importar una fuente moderna */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+/* --- IMPORTACIÓN DE FUENTES --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Inter:wght@400;500;700&family=Caveat:wght@700&display=swap');
 
-/* Variables de color para un tema oscuro */
-:root {
-  --background: #1a1a1a;
-  --surface: #2a2a2a;
-  --primary: #646cff;
-  --text-primary: rgba(255, 255, 255, 0.87);
-  --text-secondary: #a0a0a0;
-  --border: #444;
+/* --- DEFINICIÓN DE TEMAS --- */
+[data-theme='vibrant'] {
+  --color-background: #f0f2f5;
+  --color-surface: #ffffff;
+  --color-text-primary: #1f2937;
+  --color-text-secondary: #6b7280;
+  --color-accent: #3b82f6;
+  --color-border: #e5e7eb;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --font-family: 'Inter', sans-serif;
+
 }
 
-/* --- Reseteo Básico y Estilos Globales --- */
+[data-theme='dark'] {
+  --color-background: #121212;
+  --color-surface: #1e1e1e;
+  --color-text-primary: #e5e7eb;
+  --color-text-secondary: #9ca3af;
+  --color-accent: #818cf8;
+  --color-border: #374151;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --font-family: 'Inter', sans-serif;
+
+}
+
+/* --- ESTILOS BASE Y ESTRUCTURA --- */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -19,51 +34,62 @@
 }
 
 body {
-  font-family: 'Inter', sans-serif;
-  background-color: var(--background);
-  color: var(--text-primary);
+  font-family: var(--font-family);
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
   display: flex;
   justify-content: center;
   padding-top: 50px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  position: relative;
 }
 
-/* --- Contenedor Principal de la App --- */
 .app {
   width: 100%;
   max-width: 500px;
   padding: 2rem;
-  background-color: var(--surface);
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px 0 var(--shadow-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  font-family: var(--font-family);
 }
 
 h1 {
   text-align: center;
   margin-bottom: 2rem;
   font-weight: 700;
+  color: var(--color-text-primary);
+  font-size: 2.5rem;
 }
 
-/* --- Estilos para Futuros Elementos (Formulario y Botones) --- */
 form {
   display: flex;
   gap: 10px;
   margin-bottom: 2rem;
 }
 
+button,
+input,
+select {
+  font-family: var(--font-family);
+  font-size: 1rem;
+}
+
 input[type="text"] {
   flex-grow: 1;
   padding: 0.8rem;
-  border: 1px solid var(--border);
-  background-color: var(--background);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-background);
   border-radius: 5px;
-  color: var(--text-primary);
-  font-size: 1rem;
+  color: var(--color-text-primary);
 }
 
 button {
   padding: 0.8rem 1.2rem;
   border: none;
-  background-color: var(--primary);
+  background-color: var(--color-accent);
   color: white;
   font-weight: 500;
   border-radius: 5px;
@@ -72,10 +98,9 @@ button {
 }
 
 button:hover {
-  background-color: #535bf2;
+  filter: brightness(1.1);
 }
 
-/* --- Estilos para la Lista de Tareas --- */
 .todo-list {
   list-style: none;
   padding: 0;
@@ -86,8 +111,8 @@ button:hover {
   align-items: center;
   gap: 15px;
   padding: 1rem;
-  background-color: var(--background);
-  border: 1px solid var(--border);
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
   border-radius: 5px;
   margin-bottom: 10px;
   transition: background-color 0.2s ease;
@@ -95,22 +120,24 @@ button:hover {
 
 .todo-item.completed span {
   text-decoration: line-through;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
 }
 
 .todo-item span {
   flex-grow: 1;
+  color: var(--color-text-primary);
 }
 
 .todo-item input[type="checkbox"] {
   width: 20px;
   height: 20px;
+  accent-color: var(--color-accent);
 }
 
 .delete-btn {
   background-color: transparent;
   border: none;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   font-size: 1.2rem;
   font-weight: bold;
   cursor: pointer;
@@ -118,5 +145,90 @@ button:hover {
 }
 
 .delete-btn:hover {
-  color: #ff4d4d;
+  color: var(--color-accent);
+}
+
+.theme-selector {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.theme-selector select {
+  padding: 0.3rem;
+  border-radius: 5px;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0.3; /* <-- ¡La clave! Controla la visibilidad */
+  z-index: -1; /* Se asegura de que esté detrás de todo */
+  pointer-events: none; /* Evita que interfiera con los clics */
+}
+
+/* --- Estilos para el Theme Switch --- */
+.theme-switch-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.theme-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+}
+
+.theme-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 26px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--color-accent);
+}
+
+input:checked + .slider:before {
+  transform: translateX(24px);
+}
+
+.theme-switch-wrapper svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--color-text-secondary);
 }
