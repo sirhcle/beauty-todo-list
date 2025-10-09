@@ -238,3 +238,31 @@ input:checked + .slider:before {
   height: 20px;
   fill: var(--color-text-secondary);
 }
+
+/* --- Estilos para el Estado Vacío --- */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--color-text-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.empty-state svg {
+  width: 50px;
+  height: 50px;
+  stroke: var(--color-text-secondary);
+  margin-bottom: 1rem;
+}
+
+.empty-state p {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.empty-state span {
+  font-size: 0.9rem;
+}
