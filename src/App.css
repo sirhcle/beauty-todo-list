@@ -266,3 +266,66 @@ input:checked + .slider:before {
 .empty-state span {
   font-size: 0.9rem;
 }
+
+/* --- Estilos para el Filtro de Tareas --- */
+.todo-filter {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 2rem;
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  padding: 5px;
+  background-color: var(--color-background);
+}
+
+.todo-filter button {
+  background-color: transparent;
+  color: var(--color-text-secondary);
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: 500;
+}
+
+.todo-filter button.active {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+/* --- Estilos para Edición de Tareas --- */
+.item-buttons {
+  display: flex;
+  gap: 5px;
+}
+.edit-btn {
+  background: none;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  line-height: 1;
+}
+.edit-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--color-text-secondary);
+  transition: stroke 0.2s ease;
+}
+.edit-btn:hover svg {
+  stroke: var(--color-accent);
+}
+
+.edit-form {
+  flex-grow: 1;
+}
+
+.edit-form input {
+  width: 100%;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--color-accent);
+  color: var(--color-text-primary);
+  outline: none;
+}

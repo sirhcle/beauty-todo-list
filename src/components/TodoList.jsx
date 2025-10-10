@@ -1,6 +1,6 @@
 import TodoItem from './TodoItem';
 
-function TodoList({ todos, onToggleTodo, onDeleteTodo }) {
+function TodoList({ todos, onToggleTodo, onDeleteTodo, editingId, setEditingId, onUpdateTodo }) {
 
     return (
         <ul className='todo-list'>
@@ -10,6 +10,9 @@ function TodoList({ todos, onToggleTodo, onDeleteTodo }) {
                     todo={todo}
                     onToggleTodo={onToggleTodo}
                     onDeleteTodo={onDeleteTodo}
+                    editingId={editingId}
+                    setEditingId={setEditingId}
+                    onUpdateTodo={onUpdateTodo}
                 />
             ))}
         </ul>
